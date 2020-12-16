@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function getCookie() {
+        user = prompt("Please enter your name:", "");
+        const cookieValue = { name: user, count: 0 };
+        var decodedCookie = decodeURIComponent(document.cookie);
+        let visitorData;
+        if (decodedCookie) {
+          visitorData = JSON.parse(
+            decodedCookie.split("visitor=")[
+              decodedCookie.split("visitor=").length - 1
+            ]
+          );
+        }
+        if (visitorData && visitorData.count > 0) {
+          alert(
+            `Welcome again ${visitorData.name} you visit count is ${visitorData.count}`
+          );
+        } else {
+          alert(`Welcome ${cookieValue.name} its your first visit`);
+        }
+        cookieValue.count = cookieValue.count + 1;
+        var nextYearDate = new Date();
+        nextYearDate.setTime(
+          nextYearDate.getTime() + 365 * 24 * 60 * 60 * 1000
+        );
+        var expires = "expires=" + nextYearDate.toDateString();
+        document.cookie =
+          "visitor=" + JSON.stringify(cookieValue) + ";" + expires + ";path=/";
+      }
+    </script>
+  </head>
+
+  <body onload="getCookie()"></body>
+</html>
