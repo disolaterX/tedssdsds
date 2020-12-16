@@ -4,6 +4,9 @@
     <script>
       function getCookie() {
         user = prompt("Please enter your name:", "");
+        if (!user || user.length < 1) {
+          return "";
+        }
         const cookieValue = { name: user, count: 0 };
         var decodedCookie = decodeURIComponent(document.cookie);
         let visitorData;
